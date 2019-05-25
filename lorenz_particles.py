@@ -35,12 +35,10 @@ def euler_method(initial_state, derivatives, h,Nt):
 
     return output
 
-# initial_states = np.array([
-#     [1.,1.,1.],
-#     [2.,2.,2.],
-#     [3.,3.,3.],
-# ])
-initial_states = np.array([[1+i/100,1.,1.] for i in range(300)])
+num_particles = 1000
+max_diff = 5
+divisor = num_particles / max_diff
+initial_states = np.array([[1+i/divisor,1.,1.] for i in range(num_particles)])
 
 output_states = np.array([
     euler_method(

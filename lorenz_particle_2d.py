@@ -64,12 +64,16 @@ def update_plot(i):
     offset = int(Nt/num_frames)
     x,y,z = lorenz_system[i*offset]
     line.set_data([x],[z])
-    return line
+    return line,
 
-anim = animation.FuncAnimation(fig,update_plot,frames=num_frames,interval=1,repeat=False)
+anim = animation.FuncAnimation(fig,update_plot,init_func=init_plot,frames=num_frames,interval=1,repeat=False)
+
+VidWriter=animation.writers['ffmpeg']
+vidwriter = VidWriter(fps=15,bitrate=4096)
+anim.save("outputs/Lorenz_System_Particle.mp4",writer=vidwriter)
 
 GifWriter=animation.writers['imagemagick']
-gifwriter = GifWriter(fps=15,bitrate=4096)
-# anim.save("outputs/foooo.gif",writer=gifwriter)
+gifwriter = GifWriter(fps=30,bitrate=4096)
+# anim.save("outputs/Lorenz_System_Particle.gif",writer=gifwriter)
 
 plt.show()
